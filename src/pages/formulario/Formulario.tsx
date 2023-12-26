@@ -1,10 +1,10 @@
 import { FormEvent, useState } from 'react'
 import { Button, Forms, Input, Label, Title } from './styles'
 import { useDispatch } from 'react-redux'
-import { createContact } from '../Store/Reducers/Contatos'
-import Contatos from '../Models'
+import { createContact } from '../../Store/Reducers/Contatos'
+import Contatos from '../../Models'
 import { useNavigate } from 'react-router-dom'
-import { ButtonReturn } from '../pages/Lists/styles'
+import { ButtonReturn } from './styles'
 
 const Formulario = () => {
   const [name, setName] = useState('')
@@ -16,8 +16,8 @@ const Formulario = () => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-
-    const newContact = new Contatos(name, email, contato, 9)
+    const id = Math.floor(Math.random() * 1000)
+    const newContact = new Contatos(name, email, contato, id)
 
     dispatch(createContact(newContact))
     navigate('/')

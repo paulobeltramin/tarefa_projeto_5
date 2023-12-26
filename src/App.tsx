@@ -1,32 +1,22 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import ContactList from './pages/Lists'
-import SideBar from './pages/SideBar'
-import { Globals } from './Styles/Globals'
-import Formulario from './Components/Formulario'
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import { Provider } from 'react-redux'
+import { Globals } from './Styles/Globals'
+import Formulario from './pages/formulario/Formulario'
 import { store } from './Store'
+import Home from './pages/Home'
 
-const routes = createBrowserRouter([
-  {
-    path: '/',
-    element: <ContactList/>
-  },
 
-  {
-    path:'/formulario',
-    element:<Formulario/>
-  }
-])
-
-function App() {
+function App(){
   return (
     <>
   <Provider store={store}>
   <Globals />
-      <main>
-        <SideBar />
-        <RouterProvider router={routes} />
-      </main>
+    <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/formulario' element={<Formulario/>}/>
+    </Routes>
+    </BrowserRouter>
   </Provider>
     </>
   )

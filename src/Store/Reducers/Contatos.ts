@@ -1,15 +1,32 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import Contatos from '../../Models'
 
+type ContatoState = {
+  itens: Contatos[]
+}
+
+const initialState: ContatoState = {
+  itens: [
+    {
+      name: 'maria',
+      email: 'mariacardoso@gmail.com',
+      contato: '4299999999',
+      id: 1
+
+    },
+    {
+      name: 'paulo',
+      email: 'paulocardoso@gmail.com',
+      contato: '4299999999',
+      id: 2
+
+    }
+  ]
+}
+
 export const contatoSlice = createSlice({
   name: 'contato',
-  initialState: {
-    itens: [
-      new Contatos('maria', 'mariacardoso@gmail.com', '4299999999',1),
-
-      new Contatos('maria', 'mariacardoso@gmail.com', '4299999999',2)
-    ]
-  },
+  initialState,
   reducers: {
     createContact: (state, action: PayloadAction<Contatos>) => {
       const repeatContact = state.itens.find(
@@ -21,9 +38,19 @@ export const contatoSlice = createSlice({
       } else {
         state.itens.push(action.payload)
       }
+    },
+    remove: (state, action: PayloadAction<number>) => {
+      state.itens = state.itens.filter((item) => item.id !== action.payload)
+    },
+    Edit: (state, action: PayloadAction<Contatos>) => {
+      const editContact = state.itens.findIndex((item) => item.id === action.payload.id)
+
+      if (editContact > 0) {
+        state.itens[editContact] = action.payload
+      }
     }
   }
 })
 
-export const { createContact } = contatoSlice.actions
+export const { createContact, remove, Edit } = contatoSlice.actions
 export default contatoSlice.reducer
