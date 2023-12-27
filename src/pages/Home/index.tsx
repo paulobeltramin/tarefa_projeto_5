@@ -1,15 +1,11 @@
-
-import ContactList from "../../Components/contactList/Contact"
-
+import ContactList from '../../Components/contactList/Contact'
 
 const Home = () => {
-
-    return (
-        <div>
-            <ContactList />
-        </div>
-
-    )
+  return (
+    <div>
+      <ContactList />
+    </div>
+  )
 }
 
 export default Home

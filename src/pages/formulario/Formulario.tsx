@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { Button, Forms, Input, Label, Title } from './styles'
+import { Button, DivReturn, Forms, Input, Label, Title } from './styles'
 import { useDispatch } from 'react-redux'
 import { createContact } from '../../Store/Reducers/Contatos'
 import Contatos from '../../Models'
@@ -25,7 +25,9 @@ const Formulario = () => {
 
   return (
     <div>
-      <ButtonReturn to={'/'}>Voltar a lista de contatos</ButtonReturn>
+      <DivReturn>
+        <ButtonReturn to={'/'}>Voltar a lista de contatos</ButtonReturn>
+      </DivReturn>{' '}
       <Forms onSubmit={handleSubmit}>
         <Title>Crie seu novo contato:</Title>
 

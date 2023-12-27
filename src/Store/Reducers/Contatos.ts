@@ -8,18 +8,16 @@ type ContatoState = {
 const initialState: ContatoState = {
   itens: [
     {
-      name: 'maria',
-      email: 'mariacardoso@gmail.com',
-      contato: '4299999999',
+      name: 'Paulo sergio',
+      email: 'Paulo@gmail.com',
+      contato: '(42)99999999',
       id: 1
-
     },
     {
-      name: 'paulo',
-      email: 'paulocardoso@gmail.com',
-      contato: '4299999999',
+      name: 'Jose carlos almeida',
+      email: 'Jose@gmail.com',
+      contato: '(42)99999999',
       id: 2
-
     }
   ]
 }
@@ -43,7 +41,9 @@ export const contatoSlice = createSlice({
       state.itens = state.itens.filter((item) => item.id !== action.payload)
     },
     Edit: (state, action: PayloadAction<Contatos>) => {
-      const editContact = state.itens.findIndex((item) => item.id === action.payload.id)
+      const editContact = state.itens.findIndex(
+        (item) => item.id === action.payload.id
+      )
 
       if (editContact > 0) {
         state.itens[editContact] = action.payload

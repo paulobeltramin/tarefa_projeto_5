@@ -1,69 +1,105 @@
-import { useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
-import { Edit } from "../../Store/Reducers/Contatos"
-import { Card, Container, Tbody, Title } from "./styles"
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { Edit, remove } from '../../Store/Reducers/Contatos'
+import {
+  AreaText,
+  ButtonEdit,
+  ButtonRemove,
+  ButtonSave,
+  Card,
+  Container,
+  Tbody,
+  Title
+} from './styles'
 
 type Props = {
-    name: string
-    email: string
-    contato: string
-    id: number
+  name: string
+  email: string
+  contato: string
+  id: number
 }
 const Contato = ({ name, email, contato, id }: Props) => {
-    const [edit, setEdit] = useState(false)
-    const [nome, setNome] = useState('')
-    const [Email, setEmail] = useState('')
-    const [tel, setTel] = useState('')
+  const [edit, setEdit] = useState(false)
+  const [nome, setNome] = useState('')
+  const [Email, setEmail] = useState('')
+  const [tel, setTel] = useState('')
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (name.length >= 0) {
-            setNome(name)
-        }
+  useEffect(() => {
+    if (name.length >= 0) {
+      setNome(name)
+    }
 
-        if (email.length >= 0) {
-            setEmail(email)
-        }
+    if (email.length >= 0) {
+      setEmail(email)
+    }
 
-        if (contato.length >= 0) {
-            setTel(contato)
-        }
-    }, [name, contato, email])
-    return (
-        <>
-            <Container>
-                <Card width={960}>
+    if (contato.length >= 0) {
+      setTel(contato)
+    }
+  }, [name, contato, email])
 
-                    <Tbody>
-                        <tr>
-                            <Title>Nome</Title>
-                            <td>
-                                <textarea disabled={!edit} value={nome} onChange={(e) => setNome(e.target.value)} />
-                            </td>
-                            <Title>email</Title>
-                            <td>
-                                <textarea disabled={!edit} value={Email} onChange={(e) => setEmail(e.target.value)} />
-                            </td>
-                            <Title>contato</Title>
-                            <td>
-                                <textarea disabled={!edit} value={tel} onChange={(e) => setTel(e.target.value)} />
-                            </td>
+  return (
+    <>
+      <Card>
+        <Tbody>
+          <Container>
+            <tr>
+              <Title>Nome:</Title>
 
-                            {edit ? (
-                                <button onClick={() => dispatch(Edit({
-                                    name, email, contato, id
-                                }),setEdit(false))}>Salvar</button>
-                            ) : (
-                                <button onClick={()=>setEdit(true)}>editar</button>
-                            )}
-                            <button>remover</button>
-                        </tr>
-                    </Tbody>
-                </Card>
-            </Container>
-        </>
-    )
+              <td>
+                <AreaText
+                  disabled={!edit}
+                  value={nome}
+                  onChange={(e) => setNome(e.target.value)}
+                />
+              </td>
+              <Title>E-mail:</Title>
+              <td>
+                <AreaText
+                  disabled={!edit}
+                  value={Email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </td>
+              <Title>Contato:</Title>
+              <td>
+                <AreaText
+                  disabled={!edit}
+                  value={tel}
+                  onChange={(e) => setTel(e.target.value)}
+                />
+              </td>
+
+              {edit ? (
+                <ButtonSave
+                  onClick={() =>
+                    dispatch(
+                      Edit({
+                        name,
+                        email,
+                        contato,
+                        id
+                      }),
+                      setEdit(false)
+                    )
+                  }
+                >
+                  Salvar
+                </ButtonSave>
+              ) : (
+                <ButtonEdit onClick={() => setEdit(true)}>Editar</ButtonEdit>
+              )}
+              <ButtonRemove onClick={() => dispatch(remove(id))}>
+                remover
+              </ButtonRemove>
+            </tr>
+          </Container>
+        </Tbody>
+      </Card>
+    </>
+  )
 }
 
 export default Contato

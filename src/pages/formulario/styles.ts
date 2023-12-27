@@ -50,6 +50,8 @@ export const ButtonReturn = styled(Link)`
   border-radius: 8px;
   padding: 8px 24px;
   cursor: pointer;
-  text-decoration:none;
-  margin: 50px;
+  text-decoration: none;
+`
+export const DivReturn = styled.div`
+  margin: 32px;
 `
